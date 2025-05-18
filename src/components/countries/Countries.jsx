@@ -12,18 +12,25 @@ const Countries = () => {
     }, [])
 
     const handleVisitedCountries = (country) => {
-        console.log(country);
-        
+        console.log("at this country");
+        // declared spread operator to copy new array
+        const newVisitedCountry = [...visitedCountries, country];
+        setVisitedCountries(newVisitedCountry);
     }
     return (
         <>
             <h2>Countries : {countries.length}</h2>
             <div>
-                <h4>Visited Countries</h4>
+                <h4>Visited Countries : {visitedCountries.length}</h4>
+                <ul>
+                    {
+                        visitedCountries.map(country => <li key={country.cca3}>{country.name.common}</li>)
+                    }
+                </ul>
             </div>
             <div className="country2">
                 {
-                    countries.map(country => <Country key={country.cca3} country={country}></Country>)
+                    countries.map(country => <Country key={country.cca3} country={country} handleVisitedCountries={handleVisitedCountries}></Country>)
                 }
             </div>
         </>
